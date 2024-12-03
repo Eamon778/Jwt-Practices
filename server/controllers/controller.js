@@ -1,11 +1,7 @@
 const Users = require('../models/user');
+const Products = require('../models/product')
 const bcrypt = require('bcrypt');
 const { createAccessToken, createRefreshToken } = require('../config/tokenGenerator');
-
-// GET: All Data (example handler)
-const getAllData = (req, res) => {
-  res.status(200).json({ message: 'Getting all the data' });
-};
 
 // POST: User Registration
 const signUpRoute = async (req, res) => {
@@ -108,4 +104,18 @@ const loginRoute = async (req, res) => {
   }
 };
 
-module.exports = { getAllData, signUpRoute, loginRoute };
+// GET: All Data (example handler)
+const getAllData = (req, res) => {
+  res.status(200).json({ message: 'Getting all the data' });
+};
+
+const newProducts = async (req, res)=>{
+  try{
+    const product = await Products.find().sort({createdAt: -1}).limit(4)
+    res.status(200).json(product)
+  } catch (error){
+    res.status(500).json({message: "Failed to fetch products"})
+  }
+}
+
+module.exports = { getAllData, signUpRoute, loginRoute, newProducts };

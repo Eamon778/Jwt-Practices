@@ -13,7 +13,7 @@ function LoginPage() {
     const isAuthenticated = useSelector((state)=> state.auth.isAuthenticated)
 
     useEffect(()=>{
-        document.title = 'RafCart | Login'
+        document.title = 'SHOP.CO | Login'
         if (isAuthenticated){
             navigate("/")
         }
